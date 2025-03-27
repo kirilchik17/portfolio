@@ -124,7 +124,7 @@ export default function ProjectsPage() {
       longDescription:
         "A personal portfolio website showcasing projects, skills, and contact information. Built with Next.js and Tailwind CSS for a responsive, modern design. Features include dark mode support, responsive layout, and optimized performance.",
       tags: ["Next.js", "Tailwind CSS", "TypeScript", "Responsive Design"],
-      link: "https://github.com/kirilchik17",
+      link: "https://github.com/kirilchik17/portfolio",
       image: "/placeholder.svg?height=300&width=600",
     },
     {
@@ -147,9 +147,8 @@ export default function ProjectsPage() {
       title: "CV Web Extension",
       description: "Extension for the CV Managing program",
       longDescription:
-        "An interactive data visualization dashboard that transforms complex datasets into intuitive, customizable charts and graphs. Users can filter data, adjust visualization parameters, and export reports. Built with D3.js for visualizations and React for the UI, with a REST API backend for data processing.",
-      tags: ["D3.js", "React", "REST API", "Data Visualization", "Interactive"],
-      link: "https://github.com/kirilchik17",
+        "An interacive data visualization extension that is connected to the main Infoneto program, allowing you to see candidates that already exist in the system and retrive their information on social media.",
+      tags: ["JavaScript", "FlameRobin", "REST API", "Data Visualization", "Interactive"],
       image: "/placeholder.svg?height=300&width=600",
     },
   ]
