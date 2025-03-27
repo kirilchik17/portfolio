@@ -200,31 +200,32 @@ export default function Home() {
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             <Card className="card-hover-effect">
               <CardHeader>
-                <CardTitle>Competitive Programming</CardTitle>
+                <CardTitle>Performing on stage as a guitarist</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Participating in coding competitions and algorithm challenges to sharpen my problem-solving skills.
+                  I've been playing guitar for 8 years, I also have a 3 years experience in sound design and engeneering.
                 </p>
               </CardContent>
             </Card>
             <Card className="card-hover-effect">
               <CardHeader>
-                <CardTitle>Open Source Contributing</CardTitle>
+                <CardTitle>Photographing at Events</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Contributing to open source projects and learning from the global developer community.
+                  Got my first camera from my dad at 13 and since then starded photographing my own song covers, parties and album/song covers for artists.
                 </p>
               </CardContent>
             </Card>
             <Card className="card-hover-effect">
               <CardHeader>
-                <CardTitle>Capture The Flag</CardTitle>
+                <CardTitle>Hackathons</CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Participating in cybersecurity CTF competitions to improve my security skills in a practical way.
+                  Participating in development hackathons. Most recent hackathons was "Interpernuers First' hackathon in Zurich, Switzerland.
+                  Also, I participate in school hackathons as an instructor. 
                 </p>
               </CardContent>
             </Card>
