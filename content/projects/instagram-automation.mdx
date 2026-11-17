@@ -1,0 +1,27 @@
+---
+title: Instagram Automation
+summary: Connects to an Instagram account with its email and password and acts on it automatically.
+status: active
+featured: true
+order: 1
+stack: [TypeScript, Node.js, Authentication, Encryption]
+links: {}
+---
+
+## Overview
+
+It currently listens to configured DMs and auto-uploads Instagram Reels from them. It is built mainly for personal use, not for botting, although that is possible.
+
+It runs on a regular computer while presenting itself as a phone, so it can call phone-only Instagram APIs. I gathered those APIs by sniffing the traffic of my own phone. Messages are encrypted with AES using Instagram's public key and the user's data. You can configure which users' DMs it listens to.
+
+I'm currently building its front end with Flutter.
+
+## Challenges
+
+### Authentication
+
+The initial login API sends a public security key along with the request. I had to retrace its steps and build a request that passes as a genuine authentication request. I spent two days on this detail.
+
+### Behavior
+
+Because of what the program does, the connected account is often flagged as a bot. I'm developing an AI that sends requests in a human pattern so the account isn't flagged.

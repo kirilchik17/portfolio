@@ -1,0 +1,24 @@
+---
+title: CV Aggregation and Management
+summary: Full-stack web app at Infoneto for finding the best-fitting candidates in your inbox.
+featured: true
+order: 2
+stack: [ASP.NET, FlameRobin, SQLite FTS5, Google APIs, JavaScript, REST API, Data Visualization]
+links: {}
+---
+
+## Overview
+
+After you sign in with Google and grant access to Google Drive, Gmail, and Google Contacts, the app scans your Gmail inbox for CVs. An NLP model written by Infoneto analyzes each one, and the app stores the data about each candidate.
+
+Candidate data goes into SQLite with FTS5 for later search. I wrote the search and indexing. The CV itself is stored in a Google Drive folder, with an additional JSON file for the candidate's system-specific information, and the candidate's contact details go into the user's Google Contacts. You can then search for candidates and label them through the Google Contacts API.
+
+## Web extension
+
+An interactive data-visualization extension connects to the main Infoneto program. It shows candidates who already exist in the system and retrieves their information from social media.
+
+## Challenges
+
+### Google Contacts
+
+Google's Contacts API has a major flaw: it doesn't distinguish well between users. When the user is signed in with multiple accounts, you cannot reliably link a candidate to a contact in the right contact book.

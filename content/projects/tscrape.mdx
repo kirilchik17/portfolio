@@ -1,0 +1,19 @@
+---
+title: TScrape
+summary: A configurable Telegram scraping tool.
+status: in-development
+featured: true
+order: 4
+stack: [C++, WebSockets, TL, PostgreSQL, ImGui]
+links: {}
+---
+
+## Overview
+
+A custom scraper for collecting and analyzing information from Telegram. It is planned for news aggregation and for trade analysis of open trading channels.
+
+## Challenges
+
+### MTProto
+
+Telegram load-balances its traffic across private servers and uses a custom protocol, MTProto, to move data efficiently. Combined with the protocol's poor documentation, that meant a long, tedious read through Telegram's docs plus a lot of experiments. It worked, but it was very difficult.

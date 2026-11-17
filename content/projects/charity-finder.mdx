@@ -1,0 +1,27 @@
+---
+title: Charity Finder
+summary: Web app that helps people with disabilities find a charity suited to them.
+status: in-development
+featured: true
+order: 5
+stack: [ASP.NET, Docker, Google Cloud Run, Google Cloud SQL, PostgreSQL, REST API, Security]
+links: {}
+---
+
+## Overview
+
+Users enter their needs and situation, and the app looks up a charity that can help them.
+
+It is currently being tested on Google Cloud Run with Cloud SQL, packaged as a Docker image that connects to the database through a proxy. The test version is written in ASP.NET, and I plan to migrate it to Next.js and TypeScript.
+
+The data comes from the official Israeli registry of all non-profit organizations in Israel, collected with my [Web Scraper](/projects/web-scraper).
+
+## Challenges
+
+### Information gathering
+
+The first problem was gathering information about the charities. The registry has extensive data, but collecting and analyzing it took a long time. To speed it up I took a deep dive into the site's architecture and its outgoing requests. I found several vulnerabilities, which I reported to the Israeli Department of Cyber Security, and some of the minor ones let me gather the data much more efficiently.
+
+### Docker and Cloud SQL
+
+The other challenge was connecting the Docker image to Google Cloud SQL, mainly because the service is poorly documented.
