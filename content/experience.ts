@@ -1,5 +1,7 @@
-// "2025-03" style month. Day precision is noise on a timeline.
+// "2026" or "2025-03". Record only the precision you know; never invent a month.
+export type Year = `${number}`;
 export type YearMonth = `${number}-${number}`;
+export type PartialDate = Year | YearMonth;
 
 export type Position = {
   company: string;
@@ -7,9 +9,9 @@ export type Position = {
   companyBlurb: string | undefined;
   // undefined means "not filled in yet", rendered as absent rather than guessed.
   role: string | undefined;
-  start: YearMonth | undefined;
+  start: PartialDate | undefined;
   highlights: string[];
-} & ({ current: true } | { current: false; end: YearMonth | undefined });
+} & ({ current: true } | { current: false; end: PartialDate | undefined });
 
 // Newest first. The first `current: true` entry is featured on the home page.
 export const experience: Position[] = [
@@ -18,7 +20,7 @@ export const experience: Position[] = [
     companyUrl: "https://amoreg.com",
     companyBlurb: "Agentic compliance for financial services",
     role: "Software Engineer",
-    start: undefined,
+    start: "2026",
     highlights: [],
     current: true,
   },
