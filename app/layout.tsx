@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Ambient />
           <SiteHeader />
-          <main className="relative z-10 mx-auto w-full max-w-[1240px] flex-1 px-3.5 pt-5 pb-6 sm:px-5 sm:pt-10 sm:pb-10">
+          <main className="relative z-10 mx-auto w-full max-w-[1240px] flex-1 px-3.5 pt-5 pb-6 sm:px-5 sm:pt-10 sm:pb-10 print:max-w-none print:p-0">
             {children}
           </main>
           <SiteFooter />
