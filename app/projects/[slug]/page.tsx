@@ -1,6 +1,12 @@
+import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getProject, getProjects, type ProjectMeta } from "@/lib/content";
+import type { ReactNode } from "react";
+import { BackLink } from "@/components/back-link";
+import { Kicker } from "@/components/kicker";
+import { StatusBadge } from "@/components/status-badge";
+import { getProject, getProjects } from "@/lib/content";
+import { indexLabel } from "@/lib/format";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -15,59 +21,71 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return project ? { title: project.meta.title, description: project.meta.summary } : {};
 }
 
-const statusLabel: Record<NonNullable<ProjectMeta["status"]>, string> = {
-  "in-development": "In development",
-  active: "Active",
-  completed: "Completed",
-  archived: "Archived",
-};
-
 export default async function ProjectPage({ params }: Props) {
-  const project = await getProject((await params).slug);
-  if (!project) notFound();
-  const { meta, body } = project;
+  const { slug } = await params;
+  const projects = await getProjects();
+  const index = projects.findIndex((project) => project.slug === slug);
+  if (index === -1) notFound();
+  const { meta, body } = projects[index];
+  const links = [
+    meta.links.repo && { label: "Source", href: meta.links.repo },
+    meta.links.live && { label: "Live", href: meta.links.live },
+  ].filter((link) => !!link);
 
   return (
-    <article>
-      <header className="mb-8">
-        <h1 className="text-3xl font-bold">{meta.title}</h1>
-        <p className="mt-2 text-muted">{meta.summary}</p>
-        <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
-          {meta.status && (
-            <>
-              <dt>Status</dt>
-              <dd>{statusLabel[meta.status]}</dd>
-            </>
-          )}
-          {meta.year !== undefined && (
-            <>
-              <dt>Year</dt>
-              <dd>{meta.year}</dd>
-            </>
-          )}
-          <dt>Stack</dt>
-          <dd>{meta.stack.join(", ")}</dd>
-        </dl>
-        {(meta.links.repo || meta.links.live) && (
-          <ul className="mt-4 flex gap-4 text-sm">
-            {meta.links.repo && (
-              <li>
-                <a href={meta.links.repo} target="_blank" rel="noopener noreferrer" className="underline">
-                  Source
-                </a>
-              </li>
-            )}
-            {meta.links.live && (
-              <li>
-                <a href={meta.links.live} target="_blank" rel="noopener noreferrer" className="underline">
-                  Live
-                </a>
-              </li>
-            )}
-          </ul>
-        )}
+    <article className="grid grid-cols-12 gap-3.5">
+      <header className="col-span-12 px-1 pt-2 pb-4 sm:pt-4">
+        <BackLink href="/projects">All projects</BackLink>
+        <Kicker className="mt-8">Project {indexLabel(index)}</Kicker>
+        <h1 className="mt-3 max-w-[16ch] text-[clamp(52px,8vw,120px)] type-display">{meta.title}</h1>
+        <p className="mt-5 max-w-[620px] text-[clamp(18px,1.6vw,22px)] leading-snug text-muted">{meta.summary}</p>
       </header>
-      <div className="space-y-4">{body}</div>
+
+      <div className="tile col-span-12 p-6! sm:p-10! lg:col-span-8">
+        <div className="prose-mdx max-w-[68ch]">{body}</div>
+      </div>
+
+      <aside className="col-span-12 lg:col-span-4">
+        <dl className="tile grid gap-5 lg:sticky lg:top-24">
+          {meta.status && (
+            <Fact label="Status">
+              <StatusBadge status={meta.status} />
+            </Fact>
+          )}
+          {meta.year !== undefined && <Fact label="Year">{meta.year}</Fact>}
+          <Fact label="Stack">
+            <ul className="mt-1 flex flex-wrap gap-1.5">
+              {meta.stack.map((item) => (
+                <li key={item} className="chip">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </Fact>
+          {links.length > 0 && (
+            <Fact label="Links">
+              <ul className="mt-1 flex flex-wrap gap-2">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" className="btn btn-ghost h-10!">
+                      {link.label} <ArrowUpRight aria-hidden className="size-4" />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </Fact>
+          )}
+        </dl>
+      </aside>
     </article>
+  );
+}
+
+function Fact({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="grid gap-1.5 border-t border-line pt-4 first:border-t-0 first:pt-0">
+      <dt className="type-label text-faint">{label}</dt>
+      <dd className="text-[15px] font-medium">{children}</dd>
+    </div>
   );
 }
