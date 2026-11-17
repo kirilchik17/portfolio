@@ -3,7 +3,7 @@ import { site } from "@/content/site";
 
 export function SiteFooter() {
   return (
-    <footer className="relative z-10 mx-auto flex w-full max-w-[1240px] flex-wrap items-center justify-between gap-3 px-6 pt-6 pb-12 text-[13px] text-faint">
+    <footer className="relative z-10 print:hidden mx-auto flex w-full max-w-[1240px] flex-wrap items-center justify-between gap-3 px-6 pt-6 pb-12 text-[13px] text-faint">
       <p>
         © {new Date().getFullYear()} {site.name}
       </p>

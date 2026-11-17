@@ -393,6 +393,31 @@
   }
 }
 
+@media print {
+  @page {
+    size: A4;
+    margin: 13mm 15mm;
+  }
+  :root,
+  .dark {
+    --canvas: #fff;
+    --tile: #fff;
+    --tile-2: #fff;
+    --line: rgb(0 0 0 / 0.12);
+    --line-2: rgb(0 0 0 / 0.22);
+    --ink: #000;
+    --muted: #222;
+    --faint: #555;
+    --accent: #5b45f5;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

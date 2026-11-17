@@ -3,7 +3,7 @@ const grain =
 
 export function Ambient() {
   return (
-    <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
+    <div aria-hidden className="pointer-events-none fixed inset-0 z-0 overflow-hidden print:hidden">
       <div className="absolute -top-[520px] left-1/2 size-[900px] -translate-x-1/2 bg-[radial-gradient(closest-side,var(--accent-soft),transparent_70%)] blur-[10px]" />
       <div
         className="absolute inset-0 bg-[radial-gradient(var(--line-2)_1px,transparent_1px)] bg-size-[28px_28px]"

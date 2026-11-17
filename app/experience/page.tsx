@@ -1,5 +1,6 @@
-import { ArrowUpRight, Download } from "lucide-react";
+import { ArrowUpRight, Download, FileText } from "lucide-react";
 import type { Metadata } from "next";
+import Link from "next/link";
 import { SectionHead } from "@/components/section-head";
 import { experience } from "@/content/experience";
 import { cvHref, hasCv } from "@/lib/cv";
@@ -18,11 +19,16 @@ export default function ExperiencePage() {
         kicker="Experience"
         title="Where I've worked."
         action={
-          hasCv() && (
-            <a href={cvHref} download className="btn btn-ghost">
-              Download CV <Download aria-hidden className="size-4" />
-            </a>
-          )
+          <div className="flex flex-wrap gap-2">
+            <Link href="/cv" className="btn btn-ghost">
+              View CV <FileText aria-hidden className="size-4" />
+            </Link>
+            {hasCv() && (
+              <a href={cvHref} download className="btn btn-ghost">
+                Download CV <Download aria-hidden className="size-4" />
+              </a>
+            )}
+          </div>
         }
       />
       <ol className="tile col-span-12 grid gap-3.5 p-4! sm:p-7!">

@@ -30,7 +30,7 @@ export function SiteHeader() {
   const open = openOn === pathname;
 
   return (
-    <header className="sticky top-0 z-50 px-3 pt-2.5 sm:px-5 sm:pt-3.5">
+    <header className="sticky top-0 print:hidden z-50 px-3 pt-2.5 sm:px-5 sm:pt-3.5">
       <div className="mx-auto flex max-w-[1240px] items-center justify-between gap-4 rounded-2xl border border-line bg-tile/70 py-2 pr-2 pl-3 shadow-tile backdrop-blur-lg backdrop-saturate-150 sm:pl-4">
         <Link href="/" className="flex items-center gap-2.5 rounded-lg text-[17px] type-title">
           <span
