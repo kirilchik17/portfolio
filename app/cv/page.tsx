@@ -44,7 +44,7 @@ export default async function CvPage() {
       )}
       <article className="rounded-tile border border-line bg-tile px-[14mm] py-[13mm] text-[13px] leading-[1.5] shadow-tile print:rounded-none print:border-0 print:p-0 print:shadow-none">
         <header>
-          <h1 className="text-[44px] type-section">{site.name}</h1>
+          <h1 className="text-[46px] leading-[0.9] font-black font-stretch-80% tracking-[-0.025em]">{site.name}</h1>
           <p className="mt-2 text-[16px] font-semibold">{site.headline}</p>
           <ul className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11.5px] text-muted">
             {site.location && <li>{site.location}</li>}
