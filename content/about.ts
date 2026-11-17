@@ -11,6 +11,7 @@ export type SkillGroup = {
 
 export type Hobby = {
   name: string;
+  icon: "guitar" | "camera" | "hackathon" | "flag";
   description: string;
 };
 
@@ -46,21 +47,25 @@ export const skills: SkillGroup[] = [
 export const hobbies: Hobby[] = [
   {
     name: "Performing on stage as a guitarist",
+    icon: "guitar",
     description:
       "I've been playing guitar for 8 years, and I have 3 years of experience in sound design and engineering.",
   },
   {
     name: "Event photography",
+    icon: "camera",
     description:
       "I got my first camera from my dad at 13. Since then I've photographed my own song covers, parties, and album and single covers for artists.",
   },
   {
     name: "Hackathons",
+    icon: "hackathon",
     description:
       "I take part in development hackathons. The most recent was the Entrepreneur First hackathon in Zurich, Switzerland. I also join school hackathons as an instructor.",
   },
   {
     name: "Capture the Flag (CTF)",
+    icon: "flag",
     description:
       "I take part in cybersecurity CTF competitions to sharpen my security skills in practice.",
   },

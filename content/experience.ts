@@ -3,6 +3,14 @@ export type Year = `${number}`;
 export type YearMonth = `${number}-${number}`;
 export type PartialDate = Year | YearMonth;
 
+// The animated feature tile on the home page. Copy follows the company's own site.
+export type Showcase = {
+  headline: { lead: string; emphasis: string };
+  description: string;
+  flow: string[];
+  products: string[];
+};
+
 export type Position = {
   company: string;
   companyUrl: string | undefined;
@@ -11,6 +19,7 @@ export type Position = {
   role: string | undefined;
   start: PartialDate | undefined;
   highlights: string[];
+  showcase: Showcase | undefined;
 } & ({ current: true } | { current: false; end: PartialDate | undefined });
 
 // Newest first. The first `current: true` entry is featured on the home page.
@@ -22,6 +31,13 @@ export const experience: Position[] = [
     role: "Software Engineer",
     start: "2026",
     highlights: [],
+    showcase: {
+      headline: { lead: "Agentic compliance for", emphasis: "financial services." },
+      description:
+        "Agents that answer, research, review and rehearse, grounded in your regulators, policies and evidence. Built for fund administrators and trust companies, with a named human approving every change.",
+      flow: ["regulatory change", "agent research", "cited answer", "human approves"],
+      products: ["Eve", "Inspector", "Probe", "Insight"],
+    },
     current: true,
   },
   {
@@ -34,6 +50,7 @@ export const experience: Position[] = [
       "Joined at 17. First project was a Windows watchdog service that keeps a multi-program system running.",
       "Built the search and indexing for a CV aggregation app on top of Gmail, Google Drive, and Google Contacts.",
     ],
+    showcase: undefined,
     current: false,
     end: undefined,
   },

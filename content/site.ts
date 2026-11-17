@@ -4,6 +4,8 @@ export type Social = {
   href: string;
 };
 
+export type NowItem = { verb: string; detail: string };
+
 export type Site = {
   name: string;
   headline: string;
@@ -11,6 +13,7 @@ export type Site = {
   location: string | undefined;
   email: string | undefined;
   socials: Social[];
+  now: NowItem[];
 };
 
 export const site: Site = {
@@ -27,6 +30,11 @@ export const site: Site = {
       label: "LinkedIn",
       href: "https://www.linkedin.com/in/kirill-chigir-b9b701bb",
     },
+  ],
+  now: [
+    { verb: "Building", detail: "AI compliance agents at Amoreg" },
+    { verb: "Teaching", detail: "an Instagram bot to act human" },
+    { verb: "Playing", detail: "guitar on stage, chasing CTF flags" },
   ],
 };
 
