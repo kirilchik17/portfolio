@@ -1,0 +1,53 @@
+---
+title: Logging in to Instagram from a desktop by acting as a phone
+summary: Why my Instagram automation pretends to be the mobile app, how I found the APIs it calls, and the login step that took two days.
+date: 2026-11-17
+draft: true
+tags: [reverse-engineering, instagram, security, typescript]
+---
+
+I wanted a program that listens to a few Instagram DMs and uploads the Reels that people send there. The official routes don't cover that, so I ended up rebuilding part of the Instagram app's login. This post explains why the program pretends to be a phone and what the login took.
+
+## Why phone-only APIs
+
+Instagram has more than one client. The mobile app calls a set of APIs that the website doesn't, and some of what I needed only exists there. A program on a desktop can call those APIs too, but only if Instagram believes the request came from the app on a phone.
+
+So the program runs on a regular computer and presents itself as a phone. Every request it sends has to look like one the app would send.
+
+## Finding the APIs
+
+There is no public list of these APIs. I collected them by capturing the traffic from my own phone while I used the Instagram app. Each action in the app shows up as requests you can read, with the endpoint, the headers, and the body.
+
+Working from my own phone and my own account kept the problem concrete. I didn't have to guess what a request should look like. I had a real one to copy and compare against.
+
+## The login
+
+Login was the hard part. The first login request carries more than the email and password. It also sends a public security key, and the server expects the request to be built the way the app builds it.
+
+Replaying a captured request wasn't enough. To get a login accepted, I had to retrace each step the app takes to produce that request and reproduce the steps in my own code. Then I sent the result and checked whether Instagram accepted it as a genuine login.
+
+That one detail took two days.
+
+## Encrypting messages
+
+Messages go out encrypted with AES, using Instagram's public key and the user's data. In practice this means encryption is part of building the request. The program can't send a message as plain text and leave the rest to the transport.
+
+## What it does once it's in
+
+With a working login, the rest of the program uses the DM APIs. I configure which users' DMs it listens to. When a Reel arrives in one of those conversations, the program uploads it.
+
+It's written in TypeScript on Node.js, and I'm building a Flutter front end for it.
+
+I built it for my own use. It could run a bot, but that isn't what it's for.
+
+## Looking like a person
+
+An account that acts on its own gets noticed. Instagram often flags the connected account as a bot.
+
+Making each request look like the app's request solved login. It doesn't solve behavior. The timing and order of requests also have to look like a person using a phone. I'm working on an AI that sends requests in a human pattern, so the account doesn't get flagged. That part is still in progress.
+
+## What I'd tell someone starting this
+
+- Start from your own traffic. For a private API, a real captured request is the best spec you will get.
+- Budget for login. For me it was the step that took days.
+- Plan for behavior from the start. Passing as the app on each request and passing as a person over many requests are separate problems.

@@ -1,0 +1,69 @@
+---
+title: Before you reach for Selenium, read the site's own requests
+summary: How I scraped Israeli non-profit data with Selenium and AngleSharp, why it took hours, and what changed once I looked at the requests the sites make for their own data.
+date: 2026-11-17
+draft: true
+tags: [scraping, csharp, selenium, reverse-engineering]
+---
+
+For [Charity Finder](/projects/charity-finder) I needed data on Israeli non-profit organizations. For each one I wanted what it does, who it serves, where it works, and how to contact it. The data is public. Getting it out efficiently was the hard part.
+
+## The Selenium version
+
+My first collector, [CompanyDataCollector](https://github.com/kirilchik17/CompanyDataCollector), is a C# console app on .NET 8. It drives Chrome through Selenium and hands the page source to AngleSharp for parsing.
+
+It crawls two sites. Kol Zchut lists organizations by category, so the crawler starts from its category portal and visits every organization page. Some pages list sub-organizations in a table, and the crawler follows those up to three levels deep. Each Kol Zchut page links to the organization's GuideStar page. GuideStar has the registry data, such as the organization number, status, activity region, target groups, and activity statistics by area.
+
+Two details shaped the code.
+
+GuideStar renders its pages in the browser. The HTML that arrives first doesn't contain the data yet, so the crawler waits until a specific element shows up before it reads the page.
+
+```csharp
+public static bool WaitUntilElementExists(IWebDriver driver, string selector, int timeout = 15)
+{
+    try
+    {
+        var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
+        return wait.Until(x => x.FindElement(By.CssSelector(selector))) != null;
+    }
+    catch (Exception)
+    {
+        Console.WriteLine("Element was not found in current context page.");
+        return false;
+    }
+}
+```
+
+Kol Zchut shows each organization's details as a table of labels and values. Instead of class names, most lookups key on the visible Hebrew label in the table header.
+
+```csharp
+public static string XQueryLinkByText(string companyDataString)
+{
+    return $"//th[text()='{companyDataString}']/following-sibling::td[1]/a";
+}
+```
+
+Each organization becomes one row in a CSV file named with the date. CsvHelper writes the row and the crawler flushes right away, so a crash doesn't lose the rows already collected.
+
+## Why it was slow
+
+A browser scraper pays for everything a browser does. Each page loads its scripts, styles, and images, then renders, and only then can the scraper read it. Repeat that for every organization and every sub-organization. With this much data, a run took a couple of hours. Plain HTTP requests to the HTML pages weren't much better.
+
+## Reading the site's own requests
+
+A page that renders in the browser gets its data from somewhere. Its own scripts request the data from the server and then build the HTML from it.
+
+So I stopped reading the page and started reading its outgoing requests. I took a deep dive into the site's architecture and the requests it makes. On some sites that turned up more private APIs that return the data directly. Calling them skips the browser, the rendering, and the HTML parsing, and it was much faster than the Selenium crawl. That faster version isn't in the public repository.
+
+## Reporting what I found
+
+Reading a site's requests closely also shows you where it is careless. While working on this I found several vulnerabilities in the registry site and reported them to the Israeli Department of Cyber Security. Some of the minor ones let me gather the data much more efficiently.
+
+If you find something like this while scraping, report it.
+
+## What I took from it
+
+- Open the browser's network tab before writing a scraper. If the page loads its data with a request, call that request.
+- Keep Selenium for data that only exists after rendering, with no request that returns it directly.
+- On pages without useful class names, the labels a user sees make better anchors for XPath.
+- Write results as you go, so a crash costs only the row in progress.

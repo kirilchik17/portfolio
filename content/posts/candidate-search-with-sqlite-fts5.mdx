@@ -1,0 +1,55 @@
+---
+title: Searching CVs with SQLite FTS5
+summary: Notes from writing the search and indexing for a CV aggregation app at Infoneto, and the Google Contacts limit that no index could fix.
+date: 2026-11-17
+draft: true
+tags: [search, sqlite, fts5, google-apis]
+---
+
+At Infoneto I worked on a web app that finds CVs in a user's Gmail inbox and turns them into candidates you can search. My part was the search and indexing, built on SQLite with FTS5. This post covers how the app moves a CV from an inbox into the index, what FTS5 offers for this kind of search, and a problem with Google Contacts that sat outside the index.
+
+## From inbox to index
+
+The app's pipeline has six steps.
+
+1. The user signs in with Google and grants access to Gmail, Google Drive, and Google Contacts.
+2. The app scans the Gmail inbox for CVs.
+3. An NLP model written by Infoneto analyzes each CV.
+4. The candidate data goes into SQLite with FTS5.
+5. The CV file goes into a Google Drive folder, next to a JSON file with the candidate's system-specific information.
+6. The candidate's contact details go into the user's Google Contacts.
+
+The search index doesn't hold the CV files. The files stay in the user's Drive, and the contacts stay in the user's Google account. The index holds the candidate data from the NLP model, so a search can find the candidate and lead back to the rest.
+
+## What FTS5 gives you
+
+FTS5 is SQLite's full-text search extension. You create a virtual table, insert text into it, and SQLite maintains an inverted index over that text. You query it with `MATCH`.
+
+A minimal example, not the app's schema:
+
+```sql
+CREATE VIRTUAL TABLE docs USING fts5(title, body);
+
+SELECT title
+FROM docs
+WHERE docs MATCH 'developer AND (python OR csharp)'
+ORDER BY rank;
+```
+
+A few FTS5 features matter for searching people's CVs:
+
+- The query syntax covers boolean operators, phrases in double quotes, prefix matches such as `dev*`, and filters that restrict a term to one column.
+- `ORDER BY rank` sorts by BM25 relevance by default, and the `bm25()` function takes a weight per column when one field should count more than another.
+- The tokenizer decides what counts as a word. The default, `unicode61`, handles Unicode text, and others such as `porter` and `trigram` change how words match.
+
+The index lives in the same database file as the rest of the data. There is no separate search server to deploy or keep in sync over the network.
+
+## Indexing is half the work
+
+Search can only find what indexing put in. A CV is free text in whatever layout the candidate chose. The NLP model turns it into candidate data first, and the index works on that output. When a search misses a candidate, the cause can be the query, the index, or what the model extracted, and each one needs a different fix.
+
+## The part no index fixes
+
+After the search, users label candidates, and the app stores contacts and labels through the Google Contacts API. That API doesn't distinguish well between users. When someone is signed in with more than one Google account, you can't reliably link a candidate to a contact in the right contact book.
+
+Even when the search finds the right candidate, the link to the contact can point at the wrong account. Fixing that needs a change on Google's side, not in the index.
