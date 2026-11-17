@@ -48,8 +48,9 @@ export const experience: Position[] = [
     start: "2022-07",
     highlights: [
       "Worked on semantic search built on natural language processing and machine learning from human feedback, across millions of records.",
-      "Joined at 17. First project was a Windows watchdog service that keeps a multi-program system running.",
-      "Built the search and indexing for a CV aggregation app on top of Gmail, Google Drive, and Google Contacts.",
+      "Wrote the search and indexing on SQLite FTS5 for a CV aggregation app. The app pulls CVs from Gmail, keeps each file in Google Drive, and saves candidates to Google Contacts for search and labeling.",
+      "Worked on an interactive data-visualization extension that shows which candidates already exist in the system and retrieves their information from social media.",
+      "Joined at 17. My first project was a Windows watchdog service that restarts monitored programs when they fail or freeze. I finished it in 3 days against a 2-week deadline.",
       "Shipped on Google Cloud (Cloud SQL, Cloud Run), Firebase and Twilio, plus Telegram and WhatsApp bots and Windows services.",
     ],
     showcase: undefined,
