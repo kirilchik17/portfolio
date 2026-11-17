@@ -2,7 +2,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, ExternalLink, Code, Shield, Server } from "lucide-react"
+import { Code2 as Github, Link as Linkedin, ExternalLink, Code, Shield, Server } from "lucide-react"
 
 export default function Home() {
   return (
@@ -336,7 +336,7 @@ export default function Home() {
   )
 }
 
-function ProjectCard({ title, description, tags, link }) {
+function ProjectCard({ title, description, tags, link }: { title: string; description: string; tags: string[]; link: string }) {
   return (
     <Card className="flex flex-col overflow-hidden card-hover-effect">
       <CardHeader>
@@ -364,7 +364,7 @@ function ProjectCard({ title, description, tags, link }) {
   )
 }
 
-function SkillCard({ title, description, icon, skills }) {
+function SkillCard({ title, description, icon, skills }: { title: string; description: string; icon: React.ReactNode; skills: string[] }) {
   return (
     <Card className="card-hover-effect">
       <CardHeader className="flex flex-row items-center gap-4">

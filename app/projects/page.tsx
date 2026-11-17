@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronDown, ChevronUp, Github, Search, X } from "lucide-react"
+import { ChevronDown, ChevronUp, Code2 as Github, Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 
 export default function ProjectsPage() {

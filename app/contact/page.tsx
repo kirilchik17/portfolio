@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin } from "lucide-react"
+import { Code2 as Github, Link as Linkedin } from "lucide-react"
 
 export default function ContactPage() {
   const [isLoaded, setIsLoaded] = useState(false)
