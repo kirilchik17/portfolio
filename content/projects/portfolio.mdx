@@ -1,14 +1,26 @@
 ---
 title: Portfolio Website
-summary: This site, built with Next.js and Tailwind CSS.
+summary: This site, rebuilt on Next.js 16 with typed content and MDX case studies.
+year: 2025
 status: active
 featured: false
 order: 7
-stack: [Next.js, TypeScript, Tailwind CSS, MDX]
+stack: [Next.js, React, TypeScript, Tailwind CSS, MDX, Zod]
 links:
   repo: https://github.com/kirilchik17/portfolio
 ---
 
 ## Overview
 
-A personal site for my projects, writing, and experience. Projects and posts are MDX files with validated frontmatter, so adding one is adding one file.
+A personal site for my projects, writing, and experience. The first version went up in March 2025, built from v0-generated pages. In 2026 I rebuilt it on Next.js 16, React 19, and Tailwind CSS v4.
+
+## How it works
+
+Content lives in the repository, apart from the page code.
+
+- Each project and each post is one MDX file. Adding a project means adding one file.
+- A Zod schema validates every file's frontmatter at build time. A missing title or a misspelled status fails the build and names the file.
+- Work history, the about page, and site details are typed TypeScript modules. A job with no known end date stays empty instead of getting a guessed one.
+- Posts marked as drafts show up when I run the site locally and never ship in a production build.
+
+The site also generates its own sitemap and robots file.

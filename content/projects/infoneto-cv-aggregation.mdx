@@ -1,24 +1,37 @@
 ---
 title: CV Aggregation and Management
-summary: Full-stack web app at Infoneto for finding the best-fitting candidates in your inbox.
+summary: Full-stack web app at Infoneto that finds CVs in your Gmail inbox and makes the candidates searchable.
 featured: true
 order: 2
-stack: [ASP.NET, FlameRobin, SQLite FTS5, Google APIs, JavaScript, REST API, Data Visualization]
+stack: [ASP.NET, SQLite FTS5, FlameRobin, Google APIs, JavaScript, REST API, Data Visualization]
 links: {}
 ---
 
 ## Overview
 
-After you sign in with Google and grant access to Google Drive, Gmail, and Google Contacts, the app scans your Gmail inbox for CVs. An NLP model written by Infoneto analyzes each one, and the app stores the data about each candidate.
+A full-stack web app I worked on at Infoneto. It reads the CVs that land in your Gmail inbox, turns each one into a candidate record, and lets you search and label the candidates later.
 
-Candidate data goes into SQLite with FTS5 for later search. I wrote the search and indexing. The CV itself is stored in a Google Drive folder, with an additional JSON file for the candidate's system-specific information, and the candidate's contact details go into the user's Google Contacts. You can then search for candidates and label them through the Google Contacts API.
+## How it works
+
+1. You sign in with Google and grant access to Gmail, Google Drive, and Google Contacts.
+2. The app scans the Gmail inbox for CVs.
+3. An NLP model written by Infoneto analyzes each CV.
+4. The app stores the candidate data in SQLite with FTS5, so it can be searched later.
+5. The CV file goes into a Google Drive folder, next to a JSON file with the candidate's system-specific information.
+6. The candidate's contact details go into the user's Google Contacts.
+
+From there you search for candidates and label them through the Google Contacts API.
+
+## My part
+
+I wrote the search and indexing on top of SQLite FTS5. The NLP model that reads the CVs is Infoneto's own.
 
 ## Web extension
 
-An interactive data-visualization extension connects to the main Infoneto program. It shows candidates who already exist in the system and retrieves their information from social media.
+A separate interactive data-visualization extension connects to the main Infoneto program. It shows candidates who already exist in the system and retrieves their information from social media.
 
 ## Challenges
 
 ### Google Contacts
 
-Google's Contacts API has a major flaw: it doesn't distinguish well between users. When the user is signed in with multiple accounts, you cannot reliably link a candidate to a contact in the right contact book.
+Google's Contacts API doesn't distinguish well between users. When someone is signed in with more than one Google account, you can't reliably link a candidate to a contact in the right contact book.

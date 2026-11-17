@@ -1,19 +1,47 @@
 ---
 title: TScrape
-summary: A configurable Telegram scraping tool.
+summary: A configurable Telegram scraper in C++, built on TDLib with several accounts and a request queue per account.
+year: 2024
 status: in-development
 featured: true
 order: 4
-stack: [C++, WebSockets, TL, PostgreSQL, ImGui]
-links: {}
+stack: [C++, TDLib, TL, ImGui]
+links:
+  repo: https://github.com/kirilchik17/TScrape
 ---
 
 ## Overview
 
-A custom scraper for collecting and analyzing information from Telegram. It is planned for news aggregation and for trade analysis of open trading channels.
+TScrape is a scraper for collecting and analyzing information from Telegram. I planned it for news aggregation and for trade analysis of open trading channels.
+
+## How it works
+
+The code builds on TDLib, Telegram's C++ client library. Every call is a TL object from TDLib's `td_api`, sent through a `td::Client`.
+
+### One manager per account
+
+A `UserClientManager` wraps one `td::Client` for one Telegram account. Each request gets an ID. At most 10 requests run at once by default, and the rest wait in a queue. A listener thread receives responses from the client, matches each one to its request by ID, and moves the next queued request in. A mutex guards request registration, and an atomic flag tracks whether anything is still in flight.
+
+### Login as a state machine
+
+Login follows TDLib's authorization states. The manager sends the TDLib parameters, then the phone number, then the code Telegram sends to the user. Each update maps to one value of an `AuthState` enum: phone required, code required, successful, closed, or unknown.
+
+### Sessions
+
+A `UserManager` singleton scans the `sessions` folder at startup. Each subfolder is one saved account, and the manager restores a client from it, so a logged-in account doesn't need to log in again. On shutdown it sends `close` to every client.
+
+### Reading chats
+
+The scraping code requests a chat's history with `getChatHistory` and converts each message into a `TdMessage` with the text or caption, chat ID, sender ID, date, and whether it carries a file. It handles text, photo, audio, video, document, and animation messages. Files come down through `downloadFile`.
+
+The solution also has a core library and a GUI project set up for ImGui. Both are still empty.
 
 ## Challenges
 
 ### MTProto
 
-Telegram load-balances its traffic across private servers and uses a custom protocol, MTProto, to move data efficiently. Combined with the protocol's poor documentation, that meant a long, tedious read through Telegram's docs plus a lot of experiments. It worked, but it was very difficult.
+Telegram load-balances its traffic across private servers and moves data over its own protocol, MTProto. Combined with the protocol's poor documentation, that meant a long, tedious read through Telegram's docs plus a lot of experiments. It worked, but it was very difficult.
+
+## Status
+
+The commits run from November 15 to November 25, 2024. Login, sessions, and the request queue are written. Chat scraping is partly written, and the GUI has not started.

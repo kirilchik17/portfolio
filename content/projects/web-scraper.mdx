@@ -1,18 +1,39 @@
 ---
 title: Web Scraper
-summary: Custom scraper for specific sites, with scrape-blocker bypass.
+summary: Custom scrapers for specific sites, from Selenium crawlers to direct calls to a site's own data APIs.
+year: 2023
 featured: false
 order: 3
-stack: [C#, Selenium, API, Scrape-blocker bypass]
-links: {}
+stack: [C#, .NET 8, Selenium, AngleSharp, XPath, CsvHelper, HTTP APIs]
+links:
+  repo: https://github.com/kirilchik17/CompanyDataCollector
 ---
 
 ## Overview
 
-A custom scraper for collecting and analyzing information. It reaches sites either through Selenium or through custom HTTP requests to their pages and APIs. On some sites, after a deep dive, I uncovered their more private APIs, which let me scrape much more efficiently.
+I write scrapers for specific sites to collect data and analyze it. Depending on the site, a scraper either drives a real browser through Selenium or sends its own HTTP requests to the site's pages and APIs.
+
+On some sites, after a deep dive, I found the more private APIs the site uses to load its own data. Calling those directly let me scrape much more efficiently.
+
+## The public version
+
+[CompanyDataCollector](https://github.com/kirilchik17/CompanyDataCollector) is the public Selenium version. I wrote it between December 2023 and April 2024 to collect data on Israeli non-profit organizations, the data behind [Charity Finder](/projects/charity-finder). It reads two sites. Kol Zchut lists organizations by category, and GuideStar holds each organization's registry data.
+
+## How it works
+
+1. Selenium opens the Kol Zchut category portal in Chrome, and AngleSharp parses the page source.
+2. For each category, the scraper visits every organization page. When a page lists sub-organizations in a table, it follows them, up to three levels deep.
+3. From each Kol Zchut page it reads the name, website, phone, email, address, fax, Facebook page, logo, cost, main and secondary fields, and the operating organization.
+4. It then opens the organization's GuideStar page. That page renders in the browser, so the scraper waits for the elements it needs before parsing.
+5. From GuideStar it reads the organization number, status, activity region, target groups, fields of activity, and the activity statistics by area, which it stores as JSON.
+6. CsvHelper writes one row per organization to a CSV file named with the date. The scraper flushes after every row, so a run that stops halfway still leaves a usable file.
+
+Most fields are found with XPath queries keyed on the visible Hebrew label next to the value, such as the table header for "website" or "address", instead of on CSS class names.
+
+The solution has three .NET 8 projects. The console app runs the crawl, a logic library holds the per-site parsing, and a shared library holds the `Company` model.
 
 ## Challenges
 
 ### Runtime
 
-With basic methods like Selenium or plain HTTP requests, the volume of data can take a couple of hours to scrape. I got much better efficiency once I found loopholes that gave direct access to the sites' data.
+With Selenium or plain HTTP requests, the volume of data can take a couple of hours to scrape. I got much better speed once I found ways to reach the sites' data directly through their own APIs. That faster version is not in the public repository.
