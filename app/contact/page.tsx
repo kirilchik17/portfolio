@@ -1,6 +1,8 @@
+import { ArrowUpRight } from "lucide-react";
 import type { Metadata } from "next";
+import { ContactTile } from "@/components/contact-tile";
+import { SocialIcon } from "@/components/icons";
 import { site } from "@/content/site";
-import { ContactForm } from "./contact-form";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -9,21 +11,20 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="space-y-8">
-      <section>
-        <h1 className="text-3xl font-bold">Contact</h1>
-        <p className="mt-4 text-muted">Feel free to reach out for collaborations or just a friendly chat.</p>
-        <ul className="mt-4 flex gap-4">
+    <div className="grid grid-cols-12 gap-3.5 sm:pt-6">
+      <ContactTile as="h1" className="lg:p-12!">
+        <ul className="mt-8 flex flex-wrap gap-2">
           {site.socials.map((social) => (
             <li key={social.kind}>
-              <a href={social.href} target="_blank" rel="noopener noreferrer" className="underline">
+              <a href={social.href} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+                <SocialIcon kind={social.kind} className="size-4" />
                 {social.label}
+                <ArrowUpRight aria-hidden className="size-4" />
               </a>
             </li>
           ))}
         </ul>
-      </section>
-      <ContactForm />
+      </ContactTile>
     </div>
   );
 }

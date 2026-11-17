@@ -1,8 +1,17 @@
+import type { ReactNode } from "react";
 import { ContactForm } from "@/app/contact/contact-form";
 import { Kicker } from "@/components/kicker";
 import { currentPosition } from "@/content/experience";
 
-export function ContactTile({ as: Heading = "h2", className = "" }: { as?: "h1" | "h2"; className?: string }) {
+export function ContactTile({
+  as: Heading = "h2",
+  className = "",
+  children,
+}: {
+  as?: "h1" | "h2";
+  className?: string;
+  children?: ReactNode;
+}) {
   const company = currentPosition ? `${currentPosition.company}, ` : "";
 
   return (
@@ -20,6 +29,7 @@ export function ContactTile({ as: Heading = "h2", className = "" }: { as?: "h1" 
         <p className="mt-4 max-w-[340px] text-muted">
           Questions about {company}a project, or a CTF team that needs a guitarist? Drop me a line.
         </p>
+        {children}
       </div>
       <ContactForm />
     </section>
