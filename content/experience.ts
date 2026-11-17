@@ -17,7 +17,7 @@ export const experience: Position[] = [
     company: "Amoreg",
     companyUrl: "https://amoreg.com",
     companyBlurb: "Agentic compliance for financial services",
-    role: undefined,
+    role: "Software Engineer",
     start: undefined,
     highlights: [],
     current: true,
