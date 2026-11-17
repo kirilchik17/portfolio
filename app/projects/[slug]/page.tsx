@@ -31,7 +31,7 @@ export default async function ProjectPage({ params }: Props) {
     <article>
       <header className="mb-8">
         <h1 className="text-3xl font-bold">{meta.title}</h1>
-        <p className="mt-2 text-muted-foreground">{meta.summary}</p>
+        <p className="mt-2 text-muted">{meta.summary}</p>
         <dl className="mt-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-sm">
           {meta.status && (
             <>

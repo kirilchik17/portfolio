@@ -15,7 +15,7 @@ export default async function HomePage() {
       <section>
         <h1 className="text-3xl font-bold">{site.name}</h1>
         <p className="mt-2 text-xl">{site.headline}</p>
-        <p className="mt-4 text-muted-foreground">{site.intro}</p>
+        <p className="mt-4 text-muted">{site.intro}</p>
       </section>
 
       {currentPosition && (
@@ -33,7 +33,7 @@ export default async function HomePage() {
               currentPosition.company
             )}
           </p>
-          {currentPosition.companyBlurb && <p className="text-muted-foreground">{currentPosition.companyBlurb}</p>}
+          {currentPosition.companyBlurb && <p className="text-muted">{currentPosition.companyBlurb}</p>}
         </section>
       )}
 
@@ -63,7 +63,7 @@ export default async function HomePage() {
         <h2 id="contact-cta" className="text-xl font-semibold">
           Get in touch
         </h2>
-        <p className="mt-2 text-muted-foreground">Open to collaborations or just a friendly chat.</p>
+        <p className="mt-2 text-muted">Open to collaborations or just a friendly chat.</p>
         <Link href="/contact" className="mt-4 inline-block underline">
           Contact me
         </Link>

@@ -30,11 +30,11 @@ export default async function PostPage({ params }: Props) {
     <article>
       <header className="mb-8">
         <h1 className="text-3xl font-bold">{meta.title}</h1>
-        <time dateTime={meta.date.toISOString()} className="mt-2 block text-sm text-muted-foreground">
+        <time dateTime={meta.date.toISOString()} className="mt-2 block text-sm text-muted">
           {formatDate(meta.date)}
         </time>
         {meta.tags.length > 0 && (
-          <ul className="mt-2 flex gap-2 text-sm text-muted-foreground">
+          <ul className="mt-2 flex gap-2 text-sm text-muted">
             {meta.tags.map((tag) => (
               <li key={tag}>#{tag}</li>
             ))}

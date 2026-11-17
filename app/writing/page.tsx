@@ -12,7 +12,7 @@ export default async function WritingPage() {
   return (
     <>
       <h1 className="mb-8 text-3xl font-bold">Writing</h1>
-      {posts.length > 0 ? <PostList posts={posts} /> : <p className="text-muted-foreground">No posts yet.</p>}
+      {posts.length > 0 ? <PostList posts={posts} /> : <p className="text-muted">No posts yet.</p>}
     </>
   );
 }

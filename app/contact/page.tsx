@@ -12,7 +12,7 @@ export default function ContactPage() {
     <div className="space-y-8">
       <section>
         <h1 className="text-3xl font-bold">Contact</h1>
-        <p className="mt-4 text-muted-foreground">Feel free to reach out for collaborations or just a friendly chat.</p>
+        <p className="mt-4 text-muted">Feel free to reach out for collaborations or just a friendly chat.</p>
         <ul className="mt-4 flex gap-4">
           {site.socials.map((social) => (
             <li key={social.kind}>

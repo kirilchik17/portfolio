@@ -3,72 +3,402 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --canvas: #f4f4f1;
+  --tile: #ffffff;
+  --tile-2: #fafaf8;
+  --line: rgb(12 12 14 / 0.08);
+  --line-2: rgb(12 12 14 / 0.14);
+  --ink: #0c0c0e;
+  --muted: #55555d;
+  --faint: #6b6b73;
+  --accent: #5b45f5;
+  --accent-2: #13b89a;
+  --accent-soft: rgb(91 69 245 / 0.1);
+  --spot: rgb(91 69 245 / 0.08);
+  --danger: #c4314b;
+  --grain-opacity: 0.035;
+  --shadow-tile: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 1px 2px rgb(12 12 14 / 0.04),
+    0 8px 24px -12px rgb(12 12 14 / 0.1);
+  --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.8) inset, 0 2px 4px rgb(12 12 14 / 0.05),
+    0 24px 48px -20px rgb(12 12 14 / 0.22);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --canvas: #09090b;
+  --tile: #111114;
+  --tile-2: #16161a;
+  --line: rgb(255 255 255 / 0.07);
+  --line-2: rgb(255 255 255 / 0.13);
+  --ink: #f2f2f3;
+  --muted: #a1a1aa;
+  --faint: #8a8a94;
+  --accent: #8b7bff;
+  --accent-2: #34e0be;
+  --accent-soft: rgb(139 123 255 / 0.14);
+  --spot: rgb(139 123 255 / 0.1);
+  --danger: #ff7a8f;
+  --grain-opacity: 0.06;
+  --shadow-tile: 0 1px 0 rgb(255 255 255 / 0.05) inset, 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  --shadow-lift: 0 1px 0 rgb(255 255 255 / 0.08) inset, 0 30px 60px -24px rgb(0 0 0 / 0.8);
 }
 
 @theme inline {
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-canvas: var(--canvas);
+  --color-tile: var(--tile);
+  --color-tile-2: var(--tile-2);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-ink: var(--ink);
   --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-faint: var(--faint);
   --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-accent-2: var(--accent-2);
+  --color-accent-soft: var(--accent-soft);
+  --color-danger: var(--danger);
+
+  --color-amoreg: #0b0a1a;
+  --color-amoreg-ink: #f4f3ff;
+  --color-amoreg-violet: #b9aeff;
+  --color-amoreg-teal: #5ef0d2;
+
+  --radius-tile: 22px;
+  --radius-inner: 14px;
+  --radius-control: 12px;
+
+  --shadow-tile: var(--shadow-tile);
+  --shadow-lift: var(--shadow-lift);
+
+  --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@utility type-display {
+  font-weight: 900;
+  font-stretch: 72%;
+  text-transform: uppercase;
+  letter-spacing: -0.035em;
+  line-height: 0.84;
+}
+
+@utility type-section {
+  font-weight: 900;
+  font-stretch: 80%;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  line-height: 0.9;
+}
+
+@utility type-title {
+  font-weight: 800;
+  font-stretch: 90%;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+@utility type-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@utility tile {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-tile);
+  background: var(--tile);
+  box-shadow: var(--shadow-tile);
+  padding: 1.5rem;
+  transition:
+    transform 0.35s var(--ease-out-soft),
+    box-shadow 0.35s,
+    border-color 0.35s;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--spot), transparent 60%);
+  }
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+@utility tile-lift {
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lift);
+    border-color: var(--line-2);
+  }
+}
+
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: var(--tile-2);
+  padding: 4px 9px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+@utility btn {
+  display: inline-flex;
+  height: 44px;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  padding: 0 18px;
+  font-size: 14.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.2s,
+    border-color 0.2s,
+    opacity 0.2s;
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:disabled {
+    cursor: progress;
+    opacity: 0.6;
+    transform: none;
+  }
+}
+
+@utility btn-primary {
+  background: var(--ink);
+  color: var(--canvas);
+  box-shadow: 0 10px 24px -12px var(--ink);
+}
+
+@utility btn-ghost {
+  border-color: var(--line-2);
+  background: var(--tile-2);
+  &:hover {
+    border-color: var(--ink);
+  }
+}
+
+@utility arrow-dot {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  transition:
+    transform 0.3s,
+    background 0.3s,
+    color 0.3s;
+  :where(.group):hover & {
+    transform: rotate(-45deg);
+    background: var(--ink);
+    color: var(--canvas);
+    border-color: transparent;
+  }
+}
+
+@utility pulse-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 999px;
+  background: var(--accent-2);
+  animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-2) 60%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 8px transparent;
+  }
+  100% {
+    box-shadow: 0 0 0 0 transparent;
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-4%, 3%, 0) scale(1.06);
+  }
+  100% {
+    transform: translate3d(3%, -2%, 0) scale(1.02);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@utility animate-drift {
+  animation: drift 18s ease-in-out infinite alternate;
+}
+
+@utility animate-blink {
+  animation: blink 1s steps(1) infinite;
+}
+
+@utility rise {
+  animation: rise 0.7s var(--ease-out-soft) both;
+}
+
+@utility prose-mdx {
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted);
+
+  & > * + * {
+    margin-top: 1.1em;
+  }
+  & h2 {
+    margin-top: 2.2em;
+    color: var(--ink);
+    font-size: clamp(30px, 3.4vw, 40px);
+    font-weight: 900;
+    font-stretch: 80%;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    line-height: 0.95;
+  }
+  & h3 {
+    margin-top: 1.8em;
+    color: var(--ink);
+    font-size: 22px;
+    font-weight: 800;
+    font-stretch: 90%;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  & h2 + *,
+  & h3 + * {
+    margin-top: 0.6em;
+  }
+  & > :first-child {
+    margin-top: 0;
+  }
+  & strong {
+    color: var(--ink);
+    font-weight: 650;
+  }
+  & a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+  }
+  & a:hover {
+    text-decoration-thickness: 2px;
+  }
+  & ul,
+  & ol {
+    padding-left: 1.3em;
+  }
+  & ul {
+    list-style: disc;
+  }
+  & ol {
+    list-style: decimal;
+  }
+  & li + li {
+    margin-top: 0.4em;
+  }
+  & li::marker {
+    color: var(--accent);
+  }
+  & blockquote {
+    border-left: 2px solid var(--accent);
+    padding-left: 1em;
+    color: var(--ink);
+  }
+  & :not(pre) > code {
+    border: 1px solid var(--line-2);
+    border-radius: 6px;
+    background: var(--tile-2);
+    padding: 0.1em 0.35em;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--ink);
+  }
+  & pre {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-inner);
+    background: var(--tile-2);
+    padding: 16px 18px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink);
+  }
+  & hr {
+    border-color: var(--line-2);
+  }
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
   body {
-    @apply bg-background text-foreground;
+    background: var(--canvas);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+  .amoreg :focus-visible {
+    outline-color: var(--color-amoreg-teal);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }

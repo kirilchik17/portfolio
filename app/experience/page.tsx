@@ -34,7 +34,7 @@ export default function ExperiencePage() {
             {(position.role || formatPeriod(position)) && (
               <p>{[position.role, formatPeriod(position)].filter(Boolean).join(" · ")}</p>
             )}
-            {position.companyBlurb && <p className="text-muted-foreground">{position.companyBlurb}</p>}
+            {position.companyBlurb && <p className="text-muted">{position.companyBlurb}</p>}
             {position.highlights.length > 0 && (
               <ul className="mt-2 list-disc space-y-1 pl-5">
                 {position.highlights.map((highlight) => (

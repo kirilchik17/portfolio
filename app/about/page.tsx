@@ -26,7 +26,7 @@ export default function AboutPage() {
           {education.map((entry) => (
             <li key={entry.degree}>
               <p className="font-medium">{entry.degree}</p>
-              <p className="text-muted-foreground">
+              <p className="text-muted">
                 {entry.school}
                 {entry.years && `, ${entry.years}`}
               </p>
@@ -43,7 +43,7 @@ export default function AboutPage() {
           {skills.map((group) => (
             <div key={group.name}>
               <dt className="font-medium">{group.name}</dt>
-              <dd className="text-muted-foreground">{group.skills.join(", ")}</dd>
+              <dd className="text-muted">{group.skills.join(", ")}</dd>
             </div>
           ))}
         </dl>
@@ -57,7 +57,7 @@ export default function AboutPage() {
           {hobbies.map((hobby) => (
             <li key={hobby.name}>
               <h3 className="font-medium">{hobby.name}</h3>
-              <p className="text-muted-foreground">{hobby.description}</p>
+              <p className="text-muted">{hobby.description}</p>
             </li>
           ))}
         </ul>
