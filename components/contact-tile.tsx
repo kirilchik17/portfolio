@@ -19,19 +19,21 @@ export function ContactTile({
       id="contact"
       aria-labelledby="contact-heading"
       data-spotlight
-      className={`tile col-span-12 grid gap-7 bg-linear-160 from-tile from-40% to-[color-mix(in_srgb,var(--tile)_88%,var(--accent))] p-5.5! rise sm:p-8! md:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] ${className}`}
+      className={`@container tile col-span-12 bg-linear-160 from-tile from-40% to-[color-mix(in_srgb,var(--tile)_88%,var(--accent))] p-5.5! rise sm:p-8! ${className}`}
     >
-      <div>
-        <Kicker>Contact</Kicker>
-        <Heading id="contact-heading" className="mt-4 text-[clamp(52px,4.8vw,72px)] type-display">
-          Let&apos;s build <span className="block text-faint">something.</span>
-        </Heading>
-        <p className="mt-4 max-w-[340px] text-muted">
-          Questions about {company}a project, or a CTF team that needs a guitarist? Drop me a line.
-        </p>
-        {children}
+      <div className="grid gap-7 @3xl:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)]">
+        <div>
+          <Kicker>Contact</Kicker>
+          <Heading id="contact-heading" className="mt-4 text-[clamp(52px,4.8vw,72px)] type-display">
+            Let&apos;s build <span className="block text-faint">something.</span>
+          </Heading>
+          <p className="mt-4 max-w-[340px] text-muted">
+            Questions about {company}a project, or a CTF team that needs a guitarist? Drop me a line.
+          </p>
+          {children}
+        </div>
+        <ContactForm />
       </div>
-      <ContactForm />
     </section>
   );
 }
