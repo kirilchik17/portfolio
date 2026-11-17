@@ -16,31 +16,39 @@ export type Hobby = {
 };
 
 export const bio: string[] = [
-  "Hello! I'm Kirill Chigir, a Computer Science student at the Technion with a passion for full-stack development and cybersecurity.",
-  "My journey in technology began with a curiosity about how websites work, which led me to explore web development. As I went deeper, I became fascinated by the security side of web applications, which sparked my interest in cybersecurity.",
-  "I enjoy building secure, scalable applications that solve real-world problems.",
+  "Hello! I'm Kirill Chigir, a Software Engineer at Amoreg, where we build AI agents for compliance teams in financial services. I'm also studying Computer Science at the Technion.",
+  "Before Amoreg I spent three years as a Software Developer at Infoneto, working on semantic search built on natural language processing and machine learning from human feedback, across millions of records.",
+  "On the side I build automation and scraping tools, and I'm drawn to the security side of things: reverse engineering login flows, pen-testing, and CTFs.",
 ];
 
 export const education: Education[] = [
   {
-    degree: "BSc in Computer Science",
+    degree: "BSc in Computer Science (in progress)",
     school: "Technion - Israel Institute of Technology",
-    years: undefined,
+    years: "2024 to 2027",
   },
 ];
 
-// Grounded in the stacks of the projects on this site.
+// Grounded in the stacks of the projects on this site and the LinkedIn profile.
 export const skills: SkillGroup[] = [
   { name: "Languages", skills: ["C#", "C++", "TypeScript", "JavaScript", "SQL"] },
   {
     name: "Frameworks and platforms",
-    skills: [".NET", "ASP.NET", "Node.js", "Next.js", "Tailwind CSS", "Selenium"],
+    skills: [".NET", "ASP.NET MVC", "Node.js", "Next.js", "Tailwind CSS", "Flutter", "Xamarin"],
   },
-  { name: "Data", skills: ["PostgreSQL", "SQLite FTS5", "FlameRobin"] },
-  { name: "Cloud", skills: ["Docker", "Google Cloud Run", "Google Cloud SQL", "Google APIs"] },
+  { name: "Data", skills: ["PostgreSQL", "SQLite FTS5", "Firebase", "FlameRobin"] },
+  {
+    name: "Cloud",
+    skills: ["Docker", "Google Cloud Run", "Google Cloud SQL", "Google APIs", "Firebase", "Twilio"],
+  },
+  {
+    name: "Backend and automation",
+    skills: ["Microservices", "Windows services", "Selenium", "REST scraping", "Telegram and WhatsApp bots"],
+  },
+  { name: "Tools", skills: ["Git", "SVN"] },
   {
     name: "Security",
-    skills: ["Reverse engineering private APIs", "Authentication", "Encryption", "Scrape-blocker bypass"],
+    skills: ["Reverse engineering private APIs", "Authentication", "Encryption", "Scrape-blocker bypass", "OWASP ZAP pen-testing"],
   },
 ];
 

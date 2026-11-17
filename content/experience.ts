@@ -44,15 +44,17 @@ export const experience: Position[] = [
     company: "Infoneto",
     companyUrl: undefined,
     companyBlurb: undefined,
-    role: undefined,
-    start: undefined,
+    role: "Software Developer",
+    start: "2022-07",
     highlights: [
+      "Worked on semantic search built on natural language processing and machine learning from human feedback, across millions of records.",
       "Joined at 17. First project was a Windows watchdog service that keeps a multi-program system running.",
       "Built the search and indexing for a CV aggregation app on top of Gmail, Google Drive, and Google Contacts.",
+      "Shipped on Google Cloud (Cloud SQL, Cloud Run), Firebase and Twilio, plus Telegram and WhatsApp bots and Windows services.",
     ],
     showcase: undefined,
     current: false,
-    end: undefined,
+    end: "2025-08",
   },
 ];
 

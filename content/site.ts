@@ -20,8 +20,8 @@ export const site: Site = {
   name: "Kirill Chigir",
   headline: "Full-stack developer and cybersecurity enthusiast",
   intro:
-    "Computer Science student at the Technion with a passion for building secure, scalable web applications.",
-  location: undefined,
+    "Software Engineer at Amoreg and Computer Science student at the Technion, with a passion for building secure, scalable web applications.",
+  location: "Haifa, Israel",
   email: undefined,
   socials: [
     { kind: "github", label: "GitHub", href: "https://github.com/kirilchik17" },
